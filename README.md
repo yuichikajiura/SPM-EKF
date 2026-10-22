@@ -52,12 +52,8 @@ To use another profile, change the `readtable` path in `Run_EKF.m`. The noise le
 
 ## Known issues
 
-Check these before reusing or porting the filter:
-
-- In `ode_ekf_spmfdm.m`, `n_Li_s_n_hat` sums `c_n_hat(k) * H_p(2,k)`, where `H_n(2,k)` (anode volume) looks intended.
-- The lines setting `H_p(2,Nr-1)` and `H_n(2,Nr-1)` add to the `Nr-2` entry rather than the `Nr-1` entry.
-
-Both affect only the lithium-inventory pseudo-measurement, not the voltage channel.
+- **Fixed (2026-10-22):** in `ode_ekf_spmfdm.m`, the anode part of the lithium-inventory estimate `n_Li_s_n_hat` was summed with the cathode weights `H_p(2,k)` (cathode volume). It now uses `H_n(2,k)`. Re-run `Run_EKF.m` to see the effect; results produced before this date used the old line.
+- **Open:** the second row of `H` (d n_Li / d c_k) uses shell-volume weights that are not consistent with `calc_c_ave.m`. For a uniform concentration they sum to 1.015 instead of 1.0, the center-node term uses `(2/Nr)^3` where a half shell would be `(1/(2*Nr))^3`, and the `H(2,Nr-1)` lines add to the already-modified `Nr-2` entry. A clean fix is to build this row as the derivative of the `calc_c_ave.m` trapezoid average, substituting the center and surface nodes (`c_0 = 4/3 c_1 - 1/3 c_2`, `c_Nr = 4/3 c_(Nr-1) - 1/3 c_(Nr-2) + current term`), then scaling by the electrode solid volume. This affects only the inventory pseudo-measurement, not the voltage channel.
 
 ## Related repositories
 

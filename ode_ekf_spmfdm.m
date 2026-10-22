@@ -87,7 +87,7 @@ n_Li_s_p_hat = 0;
 n_Li_s_n_hat = 0;
 for k = 1:Nr-1
     n_Li_s_p_hat = n_Li_s_p_hat + c_p_hat(k) * H_p(2,k); 
-    n_Li_s_n_hat = n_Li_s_n_hat + c_n_hat(k) * H_p(2,k); 
+    n_Li_s_n_hat = n_Li_s_n_hat + c_n_hat(k) * H_n(2,k); 
 end
 n_Li_s_hat = n_Li_s_p_hat + n_Li_s_n_hat;
 
