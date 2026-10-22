@@ -47,7 +47,7 @@ To use another profile, change the `readtable` path in `Run_EKF.m`. The noise le
 ## Data
 
 - `data/SPM_FDM_nr{N}_simulation_{profile}.csv`: synthetic SPM simulations with radial resolution `N`. Columns (no header): time [s], current [A], voltage [V], surface and average anode concentration, surface and average cathode concentration [mol/m^3]. The `nr100` files serve as ground truth for the `Nr = 15` filter. Positive current is discharge.
-- `data/11_*_SP20-2_*_80SOC.*`: CALCE drive-cycle tests (DST, FUDS, US06, BJDST at 80% SoC) on a different cell, kept as current-profile sources. `Run_EKF.m` does not use them.
+- `data/11_*_SP20-2_*_80SOC.*`: CALCE drive-cycle tests (DST, FUDS, US06, BJDST at 80% SoC) on a different cell, kept as current-profile sources. `Run_EKF.m` does not use them. Source: [CALCE Battery Research Group](https://calce.umd.edu/battery-data), University of Maryland; credit CALCE if you use them.
 - `data/UDDSx2/UDDSx2_DFN_Co_1sec.mat`, `data/Sig_last.mat`: a DFN simulation and a saved covariance from earlier experiments.
 
 ## Known issues
